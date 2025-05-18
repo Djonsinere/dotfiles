@@ -1,0 +1,10 @@
+\#!/bin/bash
+#0xFF0A5EB0 (blue where FF - transparency)
+options=(
+    style=round
+    width=6.5
+    active_color=0xFF6667A4
+    inactive_color=0x5587CEFA
+)
+
+borders "${options[@]}"
