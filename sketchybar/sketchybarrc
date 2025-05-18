@@ -110,21 +110,21 @@ sketchybar --add item command.logo left                                         
                                        click_script="open -a 'Activity Monitor';
                                                      sketchybar -m --set command.logo popup.drawing=off"
 # Previous song
-  sketchybar -m --add event spotify_change "com.spotify.client.PlaybackStateChanged" \
-		--add item spotifyIndicatorPrevTrack centre \
+  sketchybar  --add item spotifyIndicatorPrevTrack centre \
     --set spotifyIndicatorPrevTrack icon=""  \
-		--set spotifyIndicatorPrevTrack background.color=0xff57627A  \
-		--set spotifyIndicatorPrevTrack background.height=21 \
-		--set spotifyIndicatorPrevTrack background.padding_right=7 \
 		--set spotifyIndicatorPrevTrack click_script="osascript -e 'tell application \"Spotify\" to previous track'" \
-		--subscribe spotifyIndicatorPrevTrack spotify_change
+    --set spotifyIndicatorPrevTrack background.color=0xff57627A \
+    --set spotifyIndicatorPrevTrack padding_left=0 padding_right=0 \
+    --set spotifyIndicatorPrevTrack icon.padding_left=12 icon.padding_right=0 \
+    --set spotifyIndicatorPrevTrack background.padding_left=0 background.padding_right=0 
 
 # Main Label
 	sketchybar -m --add event spotify_change "com.spotify.client.PlaybackStateChanged" \
 		--add item spotifyIndicator centre \
-		--set spotifyIndicator background.color=0xff57627A  \
-		--set spotifyIndicator background.height=21 \
-		--set spotifyIndicator background.padding_left=7 \
+    --set spotifyIndicator background.color=0xff57627A \
+    --set spotifyIndicator padding_left=0 padding_right=0 \
+    --set spotifyIndicator icon.padding_left=12 icon.padding_right=0 \
+    --set spotifyIndicator background.padding_left=4 background.padding_right=4 \
 		--set spotifyIndicator script="~/.config/sketchybar/plugins/spotify.sh" \
 		--set spotifyIndicator click_script="osascript -e 'tell application \"Spotify\" to playpause'" \
 		--subscribe spotifyIndicator spotify_change
@@ -133,7 +133,10 @@ sketchybar --add item command.logo left                                         
   sketchybar --add item spotifyIndicatorNextTrack centre \
     --set spotifyIndicatorNextTrack icon="" \
 		--set spotifyIndicatorNextTrack click_script="osascript -e 'tell application \"Spotify\" to next track'" \
-    --set spotifyIndicatorNextTrack background.color=0xff57627A  
+    --set spotifyIndicatorNextTrack background.color=0xff57627A \
+    --set spotifyIndicatorNextTrack padding_left=0 padding_right=0 \
+    --set spotifyIndicatorNextTrack icon.padding_left=12 icon.padding_right=0 \
+    --set spotifyIndicatorNextTrack background.padding_left=0 background.padding_right=0 
 
 
 
@@ -146,19 +149,25 @@ sketchybar --add item seperator.l1 left                   \
                                    label.drawing=off
 
 
-SPACE_LABELS=("$ICON_ORGMODE" "$ICON_VIM" "$ICON_FIREFOX" "$ICON_MAIL" "$ICON_EMACS" "$ICON_SPACE_SHUTTLE" "$ICON_SPACE_INVADERS" "$ICON_SPACE_STATION" "$ICON_MUSIC")
+
 
 sketchybar --add bracket spaces '/space\..*/'                      \
            --set         spaces background.color=$COLOR_BACKGROUND \
                                 background.drawing=on
 
-# Separator
-sketchybar --add item seperator.l2 left                   \
-           --set      seperator.l2 padding_left=4         \
-                                   padding_right=4        \
-                                   background.drawing=off \
-                                   icon.drawing=off       \
-                                   label.drawing=off
+#Spaces
+for i in {1..10}; do
+  sketchybar --add space space.$i left                                 \
+             --set space.$i associated_space=$i                        \
+                             icon=$i                                   \
+                             icon.color=$COLOR_BLUE                    \
+                             background.color=$COLOR_BACKGROUND        \
+                             background.drawing=off                    \
+                             padding_left=0 padding_right=0 \
+                             icon.padding_left=10 icon.padding_right=0 \
+                             background.padding_left=0 background.padding_right=0 \
+                             script="$PLUGIN_DIR/space.sh"
+done
 
 # Current app
 sketchybar --add item space_separator left                         \
@@ -172,10 +181,6 @@ sketchybar --add item space_separator left                         \
                                  icon.drawing=off                  \
            --subscribe front_app front_app_switched
 
-# Group the separator and app name together
-sketchybar --add bracket curr_app space_separator front_app          \
-           --set         curr_app background.color=$COLOR_BACKGROUND \
-                                  background.drawing=on
 
 ##### Adding Right Items #####
 
