@@ -109,22 +109,17 @@ sketchybar --add item command.logo left                                         
                                        label.padding_right=4                                                \
                                        click_script="open -a 'Activity Monitor';
                                                      sketchybar -m --set command.logo popup.drawing=off"
-##For spotify
-#sketchybar --add event spotify_change $SPOTIFY_EVENT \
-#    --add item spotify e \
-#    --set spotify \
-#    icon=󰎇 \
-#    icon.y_offset=1 \
-#    icon.font="$FONT_FACE:Bold:20.0" \
-#    label.drawing=off \
-#    
-#    script="$PLUGIN_DIR/spotify.sh" \
-#    --subscribe spotify spotify_change mouse.clicked
-#
+# Previous song
+  sketchybar -m --add event spotify_change "com.spotify.client.PlaybackStateChanged" \
+		--add item spotifyIndicatorPrevTrack centre \
+    --set spotifyIndicatorPrevTrack icon=""  \
+		--set spotifyIndicatorPrevTrack background.color=0xff57627A  \
+		--set spotifyIndicatorPrevTrack background.height=21 \
+		--set spotifyIndicatorPrevTrack background.padding_right=7 \
+		--set spotifyIndicatorPrevTrack click_script="osascript -e 'tell application \"Spotify\" to previous track'" \
+		--subscribe spotifyIndicatorPrevTrack spotify_change
 
-	# CURRENT SPOTIFY SONG
-	# Adding custom events which can listen on distributed notifications from other running processes
-
+# Main Label
 	sketchybar -m --add event spotify_change "com.spotify.client.PlaybackStateChanged" \
 		--add item spotifyIndicator centre \
 		--set spotifyIndicator background.color=0xff57627A  \
@@ -133,6 +128,13 @@ sketchybar --add item command.logo left                                         
 		--set spotifyIndicator script="~/.config/sketchybar/plugins/spotify.sh" \
 		--set spotifyIndicator click_script="osascript -e 'tell application \"Spotify\" to playpause'" \
 		--subscribe spotifyIndicator spotify_change
+
+# Next song
+  sketchybar --add item spotifyIndicatorNextTrack centre \
+    --set spotifyIndicatorNextTrack icon="" \
+		--set spotifyIndicatorNextTrack click_script="osascript -e 'tell application \"Spotify\" to next track'" \
+    --set spotifyIndicatorNextTrack background.color=0xff57627A  
+
 
 
 # Add separator. Adjust the length by turning icon/label on/off (built-in paddings)
@@ -145,32 +147,7 @@ sketchybar --add item seperator.l1 left                   \
 
 
 SPACE_LABELS=("$ICON_ORGMODE" "$ICON_VIM" "$ICON_FIREFOX" "$ICON_MAIL" "$ICON_EMACS" "$ICON_SPACE_SHUTTLE" "$ICON_SPACE_INVADERS" "$ICON_SPACE_STATION" "$ICON_MUSIC")
-# Mission control items, border will be drawn to current WS only
-#for i in "${!SPACE_ICONS[@]}"
-#do
-#  sid=$(($i+1))
-#  sketchybar --add space space.$sid left                                 \
-#             --set space.$sid associated_space=$sid                      \
-#                              icon="$sid"                                \
-#                              label=${SPACE_LABELS[i]}                   \
-#                              background.border_width=1                  \
-#                              script="$PLUGIN_DIR/space.sh" # Highlights the current ws
-#done
 
-# If you are using Aerospace instead of the macOS Mission Control
-#sketchybar --add event aerospace_workspace_change
-#for sid in $(aerospace list-workspaces --all); do
-#    sketchybar --add item space.$sid left                       \
-#        --subscribe space.$sid aerospace_workspace_change       \
-#        --set space.$sid                                        \
-#        icon="$sid"                                             \
-#        label=${SPACE_LABELS[sid - 1]}                          \
-#        background.border_width=1                               \
-#        click_script="aerospace workspace $sid"                 \
-#        script="$PLUGIN_DIR/aerospace.sh $sid"
-#done
-
-# Group all spaces together
 sketchybar --add bracket spaces '/space\..*/'                      \
            --set         spaces background.color=$COLOR_BACKGROUND \
                                 background.drawing=on

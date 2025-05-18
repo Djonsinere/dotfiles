@@ -11,8 +11,6 @@ ICON=""
 TRACK=""
 ALBUM=""
 ARTIST=""
-NEXT=""
-PREVIOUS=""
 
 if [ "$(osascript -e 'if application "Spotify" is running then tell application "Spotify" to get player state')" == "playing" ]; then
   PLAYING=0
@@ -30,9 +28,7 @@ if [ $RUNNING -eq 0 ]; then
     LABEL="$ICON $TRACK - $ARTIST"
   fi
 
-  # Элемент видим всегда, если Spotify запущен
   sketchybar -m --set $NAME drawing=on label="$LABEL"
 else
-  # Spotify не запущен — скрываем элемент
   sketchybar -m --set $NAME drawing=off label=""
 fi
