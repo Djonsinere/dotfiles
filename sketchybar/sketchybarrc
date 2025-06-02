@@ -109,34 +109,7 @@ sketchybar --add item command.logo left                                         
                                        label.padding_right=4                                                \
                                        click_script="open -a 'Activity Monitor';
                                                      sketchybar -m --set command.logo popup.drawing=off"
-# Previous song
-  sketchybar  --add item spotifyIndicatorPrevTrack centre \
-    --set spotifyIndicatorPrevTrack icon=""  \
-		--set spotifyIndicatorPrevTrack click_script="osascript -e 'tell application \"Spotify\" to previous track'" \
-    --set spotifyIndicatorPrevTrack background.color=0xff57627A \
-    --set spotifyIndicatorPrevTrack padding_left=0 padding_right=0 \
-    --set spotifyIndicatorPrevTrack icon.padding_left=12 icon.padding_right=0 \
-    --set spotifyIndicatorPrevTrack background.padding_left=0 background.padding_right=0 
-
-# Main Label
-	sketchybar -m --add event spotify_change "com.spotify.client.PlaybackStateChanged" \
-		--add item spotifyIndicator centre \
-    --set spotifyIndicator background.color=0xff57627A \
-    --set spotifyIndicator padding_left=0 padding_right=0 \
-    --set spotifyIndicator icon.padding_left=12 icon.padding_right=0 \
-    --set spotifyIndicator background.padding_left=4 background.padding_right=4 \
-		--set spotifyIndicator script="~/.config/sketchybar/plugins/spotify.sh" \
-		--set spotifyIndicator click_script="osascript -e 'tell application \"Spotify\" to playpause'" \
-		--subscribe spotifyIndicator spotify_change
-
-# Next song
-  sketchybar --add item spotifyIndicatorNextTrack centre \
-    --set spotifyIndicatorNextTrack icon="" \
-		--set spotifyIndicatorNextTrack click_script="osascript -e 'tell application \"Spotify\" to next track'" \
-    --set spotifyIndicatorNextTrack background.color=0xff57627A \
-    --set spotifyIndicatorNextTrack padding_left=0 padding_right=0 \
-    --set spotifyIndicatorNextTrack icon.padding_left=12 icon.padding_right=0 \
-    --set spotifyIndicatorNextTrack background.padding_left=0 background.padding_right=0 
+# spotify were here
 
 
 
@@ -197,6 +170,35 @@ sketchybar --add item clock right                              \
 sketchybar --add bracket one clock wifi \
            --set         one background.color=$COLOR_BACKGROUND \
                                   background.drawing=on
+
+# Previous song
+  sketchybar  --add item spotifyIndicatorPrevTrack left \
+    --set spotifyIndicatorPrevTrack icon=""  \
+		--set spotifyIndicatorPrevTrack click_script="osascript -e 'tell application \"Spotify\" to previous track'" \
+    --set spotifyIndicatorPrevTrack background.color=0xff57627A \
+    --set spotifyIndicatorPrevTrack padding_left=0 padding_right=0 \
+    --set spotifyIndicatorPrevTrack icon.padding_left=12 icon.padding_right=0 \
+    --set spotifyIndicatorPrevTrack background.padding_left=0 background.padding_right=0 
+
+# Main Label
+	sketchybar -m --add event spotify_change "com.spotify.client.PlaybackStateChanged" \
+		--add item spotifyIndicator left \
+    --set spotifyIndicator background.color=0xff57627A \
+    --set spotifyIndicator padding_left=0 padding_right=0 \
+    --set spotifyIndicator icon.padding_left=12 icon.padding_right=0 \
+    --set spotifyIndicator background.padding_left=4 background.padding_right=4 \
+		--set spotifyIndicator script="~/.config/sketchybar/plugins/spotify.sh" \
+		--set spotifyIndicator click_script="osascript -e 'tell application \"Spotify\" to playpause'" \
+		--subscribe spotifyIndicator spotify_change
+
+# Next song
+  sketchybar --add item spotifyIndicatorNextTrack left \
+    --set spotifyIndicatorNextTrack icon="" \
+		--set spotifyIndicatorNextTrack click_script="osascript -e 'tell application \"Spotify\" to next track'" \
+    --set spotifyIndicatorNextTrack background.color=0xff57627A \
+    --set spotifyIndicatorNextTrack padding_left=0 padding_right=0 \
+    --set spotifyIndicatorNextTrack icon.padding_left=12 icon.padding_right=0 \
+    --set spotifyIndicatorNextTrack background.padding_left=0 background.padding_right=0 
 
 # Separator
 sketchybar --add item seperator.r2 right                  \
