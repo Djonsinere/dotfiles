@@ -11,6 +11,7 @@
 #fi
 
 INFO="$(scutil --nwi | grep address | sed 's/.*://' | tr -d ' ' | head -1)"
+#INFO="$(curl ifconfig.me )"
 
 if [ "$SENDER" = "wifi_change" ]; then
   WIFI=${INFO:-"Not Connected"}

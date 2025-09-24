@@ -5,7 +5,7 @@ yabai -m config layout bsp
 yabai -m config window_placement second_child
 
 # padding set to 12px
-yabai -m config top_padding 30
+yabai -m config top_padding 7 #30 
 yabai -m config bottom_padding 4
 yabai -m config left_padding 8
 yabai -m config right_padding 8
@@ -48,3 +48,9 @@ yabai -m rule --add app="^Obsidian$" manage=off
 yabai -m rule --add app="^Skype$" manage=off
 yabai -m rule --add app="^GitHub Desktop$" manage=off
 yabai -m rule --add app="^Stickies$" manage=off
+yabai -m rule --add app="^Insomnia$" manage=off
+yabai -m rule --add app="^Boop$" manage=off
+yabai -m rule --add app="^qBittorrent$" manage=off
+yabai -m rule --add app="^Ghidra$" manage=off
+yabai -m rule --add app="^Sublime Text$" manage=on
+yabai -m rule --add app="^love$" manage=off
