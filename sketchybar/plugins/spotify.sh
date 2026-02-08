@@ -28,7 +28,7 @@ if [ $RUNNING -eq 0 ]; then
     LABEL="$ICON $TRACK - $ARTIST"
   fi
 
-  sketchybar -m --set $NAME drawing=on label="$LABEL"
+  sketchybar -m --set $NAME drawing=on label="$LABEL" label.max_chars=40
 else
   sketchybar -m --set $NAME drawing=off label=""
 fi

@@ -54,3 +54,5 @@ yabai -m rule --add app="^qBittorrent$" manage=off
 yabai -m rule --add app="^Ghidra$" manage=off
 yabai -m rule --add app="^Sublime Text$" manage=on
 yabai -m rule --add app="^love$" manage=off
+yabai -m rule --add app="^Google Chrome$" manage=off 
+yabai -m rule --add app="^QuickTime Player$" manage=off
